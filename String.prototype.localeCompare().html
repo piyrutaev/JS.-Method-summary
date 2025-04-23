@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Справка по localeCompare()</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    h1, h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Справка по <code>String.prototype.localeCompare()</code></h1>
+
+<p><strong>Метод <code>localeCompare()</code></strong> сравнивает текущую строку (<code>this</code>) с другой строкой с учётом локали и возвращает число, указывающее порядок следования строк.</p>
+
+<h2>Синтаксис</h2>
+<pre>referenceStr.localeCompare(compareString, [locales], [options])</pre>
+
+<h2>Параметры</h2>
+<ul>
+  <li><strong>compareString</strong> — строка для сравнения (обязательный параметр).</li>
+  <li><strong>locales</strong> — строка или массив строк локалей, например: <code>'en'</code>, <code>'ru'</code>.</li>
+  <li><strong>options</strong> — объект с настройками:
+    <ul>
+      <li><code>sensitivity</code>: <code>"base"</code>, <code>"accent"</code>, <code>"case"</code>, <code>"variant"</code></li>
+      <li><code>ignorePunctuation</code>: <code>true</code> / <code>false</code></li>
+      <li><code>numeric</code>: <code>true</code> (сравнение чисел как чисел)</li>
+      <li><code>caseFirst</code>: <code>"upper"</code>, <code>"lower"</code>, <code>"false"</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Возвращаемое значение</h2>
+<ul>
+  <li><code>-1</code> — текущая строка идёт перед <code>compareString</code></li>
+  <li><code>0</code> — строки равны</li>
+  <li><code>1</code> — текущая строка идёт после <code>compareString</code></li>
+</ul>
+
+<h2>Примеры</h2>
+<pre>
+'a'.localeCompare('b');                            // -1
+'ä'.localeCompare('a', 'de');                      // 1 (немецкий алфавит)
+'ä'.localeCompare('a', 'sv');                      // -1 (шведский алфавит)
+'2'.localeCompare('10');                           // 1
+'2'.localeCompare('10', undefined, { numeric: true }); // -1
+</pre>
+
+<h2>Использование в сортировке</h2>
+<pre>
+arr.sort((a, b) => a.localeCompare(b, 'ru', { sensitivity: 'base' }));
+</pre>
+
+</body>
+</html>
